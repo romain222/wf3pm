@@ -1,0 +1,33 @@
+HEADER:
+    HOME: Accueil
+    ADD_PROJECT: Ajoute un projet
+    LIST_PROJECTS: Afficher les projets
+    LOGIN: Identifiez-vous
+    REGISTER: Créez un compte
+    LOCALE:
+        EN: Anglais
+        FR: Francais
+ADD_PROJECT:
+    TITLE: Ajoute un projet
+LIST_PROJECTS:
+    TITLE: List Projects
+FOOTER:
+    LICENSE: TOUS DROITS RÉSERVÉS
+FORM:
+    PRODUCT:
+        NAME: Nom
+        PLACEHOLDER:
+            DESCRIPTION: La description du projet
+    USER:
+        USERNAME: Nom d'utilisateur
+        FIRSTNAME: Prénom
+        LASTNAME: Nom
+        EMAIL: Email
+        PASSWORD:
+            FIRST: Mot de passe
+            SECOND: Vérifiez votre mot de passe
+        PLACEHOLDER:
+            USERNAME: entez un nom d'utilisateur
+            FIRSTNAME: entez un prénom
+            LASTNAME: entez un nom
+            EMAIL: entez une email

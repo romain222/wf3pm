@@ -1,11 +1,49 @@
 
-<header class="item-header">
-	<img alt="Logo" width="100px" src="https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/3639361/580/387/m1/fpnw/wm0/global-business-logo-template-.png?1511697736&s=b399b1d36155af1227d7d9e6257dfd9a">
+<header>
+	<a href="{{ path('homepage')}}" >
+		<img alt="Logo" src="https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/3639361/580/387/m1/fpnw/wm0/global-business-logo-template-.png?1511697736&s=b399b1d36155af1227d7d9e6257dfd9a">
+	</a>
 	<ul>
-		<li><a href="#" >Home</a></li>
-		<li><a href="#" >List Projects</a></li>
-		<li><a href="#" >Add Projects</a></li>
-		<li><a href="#" >Login</a></li>
-		<li><a href="#" >Register</a></li>
+		<li>
+			<a href="{{ path('homepage')}}" >
+			    {{ 'HEADER.HOME'|trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('list_products')}}" >
+			    {{ 'HEADER.LIST_PROJECTS'|trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('add_product') }}" >
+			    {{ 'HEADER.ADD_PROJECT'|trans }}
+			</a>
+		</li>
+		<li>
+			<a href="#" >
+			    {{ 'HEADER.LOGIN'|trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('user_register') }}" >
+			    {{ 'HEADER.REGISTER'|trans }}
+			</a>
+		</li>
+		<li>
+			<a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}">Language: {{ 'HEADER.LOCALE.EN'|trans }}</a>
+		</li>
+		<li>
+			<a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'fr'}) }}">Language: {{ 'HEADER.LOCALE.FR'|trans }}</a>
+		</li>
 	</ul>
 </header>
+
+{% set infoMessages = app.flashes('info') %}
+
+{% if infoMessages is not empty %}
+<div>
+	{% for message in infoMessages %}
+		<p style="background-color:lightgreen">{{ message }}</p>
+	{% endfor %}
+</div>
+{% endif %}

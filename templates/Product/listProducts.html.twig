@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'LIST_PROJECTS.TITLE'|trans }}{% endblock %}
+
+{% block body %}
+	<div class="item-main">
+		{% for product in products %}
+		
+			{% if product.getDescription()|length > 500 %}
+				{% set description = product.getDescription()|slice(0, 500) ~ '...'  %}
+			{% else %}
+				{% set description = product.getDescription() %}
+			{% endif %}
+			
+    		<div class="product-card">
+    			<h3>{{ product.getName() }}</h3>
+    			<hr>
+    			<p>{{ description }}</p>
+    			<p>v{{ product.getVersion() }}</p>
+    			<a href="{{ path('homepage') }}">Details</a>
+    		</div>
+    		
+    		{% else %}
+    		
+    			<p>{{ 'LIST_PRODUCT.NO_PRODUCT'|trans }}</p>
+    		
+		{% endfor %}
+	</div>
+	{% include 'sidebar.html.twig' %}
+{% endblock %}

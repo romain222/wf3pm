@@ -1,0 +1,33 @@
+HEADER:
+    HOME: Home
+    ADD_PROJECT: Add Project
+    LIST_PROJECTS: List Projects
+    LOGIN: Login
+    REGISTER: Register
+    LOCALE:
+        EN: English
+        FR: French
+ADD_PROJECT:
+    TITLE: Add Project
+LIST_PROJECTS:
+    TITLE: List Projects
+FOOTER:
+    LICENSE: ALL RIGHTS RESERVED
+FORM:
+    PRODUCT:
+        NAME: Name
+        PLACEHOLDER:
+            DESCRIPTION: Description here
+    USER:
+        USERNAME: Username
+        FIRSTNAME: Firstname
+        LASTNAME: Lastname
+        EMAIL: Email
+        PASSWORD:
+            FIRST: Password
+            SECOND: Confim Password
+        PLACEHOLDER:
+            USERNAME: enter username
+            FIRSTNAME: enter firstname
+            LASTNAME: enter lastname
+            EMAIL: enter email

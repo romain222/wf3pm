@@ -1,11 +1,12 @@
 *{
 	box-sizing: border-box;
+	font-family: Verdana, Geneva, sans-serif;
 }
 
 body{
 	margin: 0px;
-	background-color: grey;
 	min-width: 300px;
+	
 }
 
 h2{
@@ -15,40 +16,45 @@ h2{
 
 .container{
 	display: grid;
-	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-columns: auto;
 	grid-template-rows: 15% 50% 20% 15%;
 	grid-template-areas:
-	"header header header header"
-	"main main main main"
-	"sidebar sidebar sidebar sidebar"
-	"footer footer footer footer";
+	"header"
+	"main"
+	"sidebar"
+	"footer";
 }
 
 .item-header{
 	display: flex;
 	justify-content: space-between;
 	grid-area: header;
-	background-color: olive;
+	background: linear-gradient(orange, gold);
 	box-shadow: 0px 0px 10px black;
 }
 .item-header img{
 	order: 1;
-	//position: absolute;
-	//right: 0px;
+	height: 135px;
 }
 .item-header ul{
 	display: flex;
 	flex-direction: column;
+	order: 0;
 	margin: 0;
 	padding: 0;
 	list-style:none;
 }
 .item-header ul li{
-	margin-right: 20px;
+	border: 1px solid black;
 	
+	white-space: nowrap;
 }
 .item-header ul li a{
 	text-decoration:none;
+	margin: auto;
+	vertical-align: middle;
+	padding: 5px 10px;
+	line-height: 25px;
 }
 .item-header ul li a:hover{
 	color:black;
@@ -57,6 +63,7 @@ h2{
 .item-main{
 	grid-area: main;
 	background-color: lightgrey;
+	text-align: justify;
 }
 .item-main section article{
 	background-color: white;
@@ -65,10 +72,35 @@ h2{
 
 .item-sidebar{
 	grid-area: sidebar;
-	background-color: aquamarine;
+	background-color: gold;
+	border-left: 1px solid black;
 }
 .item-sidebar ul{
 	list-style:none;
+	padding: 0;
+}
+.item-sidebar ul li{
+	padding: 5px 10px;
+	border: 1px solid grey;
+}
+
+.product-card{
+	background-color:white;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px black;
+	padding: 10px;
+	margin: 10px;
+}
+.product-card a{
+	border-radius: 5px;
+	border: 1px solid black;
+	padding: 5px 10px;
+	background-color: lightgrey;
+	color:black;
+	text-decoration: none;
+}
+.product-card a:hover{
+	background-color: white;
 }
 
 .item-footer{
@@ -78,13 +110,21 @@ h2{
 	padding: 20px;
 }
 
+form div input, form div textarea {
+	border-radius: 5px;
+	border: 1px solid grey;
+}
+
+// tablet
 @media only screen and (min-width: 768px) {
+	
 	.container{
+		grid-template-columns: 1fr 200px;
 		grid-template-areas:
-		"header header header header"
-		"main main main sidebar"
-		"main main main sidebar"
-		"footer footer footer footer";
+		"header header"
+		"main sidebar"
+		"main sidebar"
+		"footer footer";
 	}
 	.item-header{
 		flex-direction: row;
@@ -93,9 +133,18 @@ h2{
 	.item-header img{
 		position: static;
 		order: 0;
-		
 	}
 	.item-header ul{
 		flex-direction: row;
 	}
+	body{
+	background-color: red;
+	}
+	
 }
+
+// desktop
+@media only screen and (min-width: 1000px) {
+	
+}
+

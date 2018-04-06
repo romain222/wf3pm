@@ -3,5 +3,46 @@
 #    controller: App\Controller\DefaultController::index
 
 homepage:
-    path: /
+    path: /{_locale}
     controller: App\Controller\DefaultController::homepage
+    defaults:
+        _locale: en
+    requirements:
+        _locale: 'en|fr'
+        
+    
+add_product:
+    path: /{_locale}/product/add/
+    controller: App\Controller\ProductController::addProduct
+    defaults:
+        _locale: en
+    requirements:
+        _locale: 'en|fr'
+       
+list_products:
+    path: /{_locale}/product/list/
+    controller: App\Controller\ProductController::listProducts
+    defaults:
+        _locale: en
+    requirements:
+        _locale: 'en|fr'
+        
+user_register:
+    path: /{_locale}/user/register/
+    controller: App\Controller\UserController::register
+    defaults:
+        _locale: en
+    requirements:
+        _locale: 'en|fr'
+
+user_activate:
+    path: /{_locale}/user/activate/{token}
+    controller: App\Controller\UserController::activateUser
+    defaults:
+        _locale: en
+    requirements:
+        _locale: 'en|fr'
+        
+user_available:
+   path: /user/available/
+   controller: App\Controller\UserController::availableUser

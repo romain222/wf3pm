@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'ADD_PROJECT.TITLE'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="item-main">
+    	{{ form_start(formular) }}
+    	
+    		<div class="form-name">
+        		{{ form_label(formular.name) }}
+        		{{ form_errors(formular.name) }}
+    			<br>
+    		    {{ form_widget(formular.name) }}
+    		</div>
+    		
+    		
+    		<div class="form-description">
+        		{{ form_label(formular.description) }}
+        		{{ form_errors(formular.description) }}
+    			<br>
+    		    {{ form_widget(formular.description) }}
+    		</div>
+    		
+    		
+    		<div class="form-version">
+        		{{ form_label(formular.version) }}
+        		{{ form_errors(formular.version) }}
+    			<br>
+    		    {{ form_widget(formular.version) }}
+    		</div>
+    		
+    	{{ form_end(formular) }}
+	</div>
+	
+	{% include 'sidebar.html.twig' %}
+{% endblock %}

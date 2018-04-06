@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="item-main">
+    	{{ form_start(formular) }}
+    	
+    		<div>
+        		{{ form_label(formular.username) }}
+        		{{ form_errors(formular.username) }}
+        		<br>
+        		{{ form_widget(formular.username) }}
+    		</div>
+    		
+    		<div>
+    			{{ form_label(formular.firstname) }}
+        		{{ form_errors(formular.firstname) }}
+        		<br>
+        		{{ form_widget(formular.firstname) }}
+    		</div>
+    		
+    		<div>
+    			{{ form_label(formular.lastname) }}
+        		{{ form_errors(formular.lastname) }}
+        		<br>
+        		{{ form_widget(formular.lastname) }}
+    		</div>
+    		
+    		<div>
+    			{{ form_label(formular.email) }}
+        		{{ form_errors(formular.email) }}
+        		<br>
+        		{{ form_widget(formular.email) }}
+    		</div>
+    		
+    		<div>
+    			{{ form_label(formular.password.first) }}
+        		{{ form_errors(formular.password.first) }}
+        		<br>
+        		{{ form_widget(formular.password.first) }}
+    		</div>
+    		
+    		<div>
+    			{{ form_label(formular.password.second) }}
+        		{{ form_errors(formular.password.second) }}
+        		<br>
+        		{{ form_widget(formular.password.second) }}
+    		</div>
+    		
+    	{{ form_end(formular) }}
+    </div>
+    
+    <section class="item-sidebar">
+    	<h2>Sidebar</h2>
+		<ul>
+			<li>Sidebar element</li>
+			<li>Sidebar element</li>
+			<li>Sidebar element</li>
+			<li>Sidebar element</li>
+			<li>Sidebar element</li>
+		</ul>
+	</section>
+{% endblock %}

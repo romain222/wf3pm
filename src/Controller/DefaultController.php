@@ -8,7 +8,6 @@ class DefaultController
 {
     public function homepage(Environment $twig)
     {
-        
         return new Response($twig->render('Default/homepage.html.twig'));
     }
 }
