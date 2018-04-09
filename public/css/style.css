@@ -54,7 +54,7 @@ h2{
 	margin: auto;
 	vertical-align: middle;
 	padding: 5px 10px;
-	line-height: 25px;
+	/*line-height: 25px;*/
 }
 .item-header ul li a:hover{
 	color:black;
@@ -109,13 +109,30 @@ h2{
 	background-color: black;
 	padding: 20px;
 }
-
+form{
+	text-align:center;
+}
+form div label{
+	text-align: center; 
+	width: 100%;
+}
 form div input, form div textarea {
+	
+	width: 200px;
 	border-radius: 5px;
 	border: 1px solid grey;
+	
 }
 
-// tablet
+.username-available {
+	color:green;
+}
+.username-unavailable {
+	color:red;
+}
+
+
+/* tablet */
 @media only screen and (min-width: 768px) {
 	
 	.container{
@@ -137,14 +154,12 @@ form div input, form div textarea {
 	.item-header ul{
 		flex-direction: row;
 	}
-	body{
-	background-color: red;
-	}
 	
 }
 
-// desktop
-@media only screen and (min-width: 1000px) {
+
+/* desktop */
+@media only screen and (min-width: 1200px) {
+	body{background-color:red;}}
 	
 }
-

@@ -18,6 +18,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use App\Repository\RoleRepository;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController
 {
@@ -28,12 +31,15 @@ class UserController
         SessionInterface $session, 
         ObjectManager $manager, 
         UrlGeneratorInterface $urlGenerator,
-        \Swift_Mailer $mailer
+        \Swift_Mailer $mailer,
+        EncoderFactoryInterface $encoderFactory,
+        RoleRepository $roleRepository
     ) {
         $user = new User();
         $builder = $factory->createBuilder(FormType::class, $user);
         
-        $builder->add('username', TextType::class, ['label' => 'FORM.USER.USERNAME', 'attr' => ['placeholder' => 'FORM.USER.PLACEHOLDER.USERNAME']])
+        $builder
+        ->add('username', TextType::class, ['label' => 'FORM.USER.USERNAME', 'attr' => ['placeholder' => 'FORM.USER.PLACEHOLDER.USERNAME']])
         ->add('firstname', TextType::class, ['label' => 'FORM.USER.FIRSTNAME', 'attr' => ['placeholder' => 'FORM.USER.PLACEHOLDER.FIRSTNAME']])
         ->add('lastname', TextType::class, ['label' => 'FORM.USER.LASTNAME', 'attr' => ['placeholder' => 'FORM.USER.PLACEHOLDER.LASTNAME']])
         ->add('email', TextType::class, ['label' => 'FORM.USER.EMAIL', 'attr' => ['placeholder' => 'FORM.USER.PLACEHOLDER.EMAIL']])
@@ -53,6 +59,16 @@ class UserController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $salt = md5($user->getUsername());
+            $user->setSalt($salt);
+            
+            $encoder = $encoderFactory->getEncoder(User::class);
+            $password = $encoder->encodePassword($user->getPassword(), $salt);
+            
+            $user->setPassword($password);
+            
+            $user->addRole($roleRepository->findOneByLabel('ROLE_USER'));
             
             $manager->persist($user);
             $manager->flush();
@@ -93,7 +109,8 @@ class UserController
     public function activateUser($token, 
         ObjectManager $manager, 
         SessionInterface $session, 
-        UrlGeneratorInterface $urlGenerator)
+        UrlGeneratorInterface $urlGenerator,
+        RoleRepository $roleRepository)
     {
         $repository = $manager->getRepository(User::class);
         $user = $repository->findOneByEmailToken($token);
@@ -104,6 +121,7 @@ class UserController
         
         $user->setActive(true);
         $user->setEmailToken(NULL);
+        $user->addRole($roleRepository->findOneByLabel('ROLE_ACTIVE'));
         
         $manager->flush();
         
@@ -123,6 +141,19 @@ class UserController
         }
         
         return new JsonResponse(['available' => !$unavailable]);
+    }
+    
+    public function login(Environment $twig, AuthenticationUtils $authUtils)
+    {
+        return new Response(
+            $twig->render(
+                'Security/login.html.twig',
+                [
+                    'last_username' => $authUtils->getLastUsername(),
+                    'error' => $authUtils->getLastAuthenticationError()
+                ]
+            )
+        );
     }
 }
 
