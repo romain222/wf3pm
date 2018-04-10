@@ -110,8 +110,8 @@ class UserController
         ObjectManager $manager, 
         SessionInterface $session, 
         UrlGeneratorInterface $urlGenerator,
-        RoleRepository $roleRepository)
-    {
+        RoleRepository $roleRepository
+        ) {
         $repository = $manager->getRepository(User::class);
         $user = $repository->findOneByEmailToken($token);
         

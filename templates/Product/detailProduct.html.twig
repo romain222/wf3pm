@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        <div>
+        	<h1>Product Details</h1>
+        	
+        	<a href="{{ path('list_products') }}" alt="">Back to product list</a>
+        	
+        	{% if product is null %}
+        		<h2>Error: 404</h2>
+        		<p>The product you are looking for is not here. You might want to hit back now.</p>
+        	{% else %}    	
+            	
+            	<h2>{{ product.getName() }}</h2>
+            	<p>v{{ product.getVersion() }}</p>
+            	
+            	<p style="text-align: justify;">{{ product.getDescription()|nl2br }}</p>
+            	
+            	<h3>Comments</h3>
+            	
+            	{{ form_start(form) }}
+            		{{ form_label(form.comment) }}
+            		<br>
+            		{{ form_widget(form.comment) }}
+            		<br>
+            		{{ form_label(form.files) }}
+            		<br>
+            		{{ form_widget(form.files) }}
+            	{{ form_end(form) }}
+            	
+            	{% for comment in product.getComments() %}
+                	<div class="comment">
+                    		<h4>#{{ comment.getId() }} posted by <em>{{ comment.getAuthor().getUsername() }}</em></h4>
+                    		<hr>
+                    		<p>{{ comment.getComment() }}</p>
+                    		<hr>
+                    		{% for file in comment.getFiles() %}
+                    			{% if file.getMimeType()|slice(0,6) == 'image/' %}
+                    				<img width="100%" alt="{{ file.getName() }}" src="{{ file.getFileUrl() }}">
+                    			{% else %}
+                    				<a class="btn btn-download" href="{{ file.getFileUrl() }}" alt="">
+                    					{{ 'PRODUCT.DOWNLOAD'|trans }} {{ file.getName() }}
+                					</a>
+                    			{% endif %}
+                    		{% endfor %}
+                	</div>
+            	{% endfor %}
+            	
+        	{% endif %}
+        </div>
+        
+        {% include 'sidebar.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="/js/commentFileAdder.js" type="text/javascript"></script>
+{% endblock %}

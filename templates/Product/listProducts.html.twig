@@ -17,7 +17,7 @@
     			<hr>
     			<p>{{ description }}</p>
     			<p>v{{ product.getVersion() }}</p>
-    			<a href="{{ path('homepage') }}">Details</a>
+    			<a href="{{ path('detail_product') }}?id={{ product.getId() }}">Details</a>
     		</div>
     		
     		{% else %}
