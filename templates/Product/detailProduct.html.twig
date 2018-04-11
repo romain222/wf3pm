@@ -10,7 +10,7 @@
         	{% if product is null %}
         		<h2>Error: 404</h2>
         		<p>The product you are looking for is not here. You might want to hit back now.</p>
-        	{% else %}    	
+        	{% else %}
             	
             	<h2>{{ product.getName() }}</h2>
             	<p>v{{ product.getVersion() }}</p>
@@ -31,7 +31,7 @@
             	
             	{% for comment in product.getComments() %}
                 	<div class="comment">
-                    		<h4>#{{ comment.getId() }} posted by <em>{{ comment.getAuthor().getUsername() }}</em></h4>
+                    		<h4>#{{ loop.index }} posted by <em>{{ comment.getAuthor().getUsername() }}</em></h4>
                     		<hr>
                     		<p>{{ comment.getComment() }}</p>
                     		<hr>

@@ -2,11 +2,11 @@
 function addFileInput() {
 	
 	var prototype = $('#comment_files').data('prototype');
-	var count = $('#comment_files > label').length;
+	var count = $('#comment_files > div').length;
 	
 	var newForm = prototype.replace(/__name__/g, count);
 	
-	var group = $('div', newForm);
+	var group = $('input', newForm).parent();
 	
 	$('#comment_files').append(group);
 }

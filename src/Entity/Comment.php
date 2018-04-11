@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
@@ -31,6 +33,7 @@ class Comment
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CommentFile", mappedBy="comment", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $files;
 
@@ -71,6 +74,16 @@ class Comment
     {
         $this->author = $author;
 
+        return $this;
+    }
+    
+    public function setFiles(array $files)
+    {
+        $this->files = new ArrayCollection();
+        foreach ($files as $file) {
+            $this->addFile($file);
+            
+        }
         return $this;
     }
 
@@ -115,5 +128,20 @@ class Comment
         $this->product = $product;
 
         return $this;
+    }
+    
+    
+    /**
+     * @Assert\Callback()
+     */
+    public function validateComment(ExecutionContextInterface $context)
+    {
+        if (empty($this->files) && empty($this->comment)) {
+            
+            $context->buildViolation('This field cannot be empty if no comment was submitted')
+                ->atPath('comment')
+                ->addViolation();
+            
+        }
     }
 }
